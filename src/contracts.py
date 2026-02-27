@@ -293,7 +293,7 @@ class BaseBuilderConfig:
     def __init__(self):
         # Property and operator
         self.property: Optional[str] = None  # pos, speed, direction, etc.
-        self.operator: Optional[str] = None  # to, by, add, sub, mul, div
+        self.operator: Optional[str] = None  # to, by, add, mul
         self.value: Any = None
         self.mode: Optional[str] = None  # 'offset', 'override', or 'scale'
         self.order: Optional[int] = None  # Explicit layer ordering

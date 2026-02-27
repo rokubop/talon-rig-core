@@ -36,7 +36,7 @@ def calculate_scalar_target(
     """Convert operator + value to canonical form for mode.
 
     Args:
-        operator: The operation (to, add, sub, mul, div)
+        operator: The operation (to, add, mul)
         value: The input value
         current: The current/base value
         mode: The mode (offset, override, scale)
@@ -49,36 +49,24 @@ def calculate_scalar_target(
             return value
         elif operator in ("by", "add"):
             return 1.0 + value
-        elif operator == "sub":
-            return 1.0 - value
         elif operator == "mul":
             return value
-        elif operator == "div":
-            return 1.0 / value if value != 0 else 1.0
 
     elif mode == "override":
         if operator == "to":
             return value
         elif operator in ("by", "add"):
             return current + value
-        elif operator == "sub":
-            return current - value
         elif operator == "mul":
             return current * value
-        elif operator == "div":
-            return current / value if value != 0 else current
 
     else:  # offset
         if operator == "to":
             return value
         elif operator in ("by", "add"):
             return value
-        elif operator == "sub":
-            return -value
         elif operator == "mul":
             return current * (value - 1)
-        elif operator == "div":
-            return current * (1 - 1/value) if value != 0 else 0
 
     return value
 
@@ -132,18 +120,6 @@ def calculate_direction_target(
                 new_x = current.x * cos_a - current.y * sin_a
                 new_y = current.x * sin_a + current.y * cos_a
                 return Vec2(new_x, new_y).normalized()
-        elif operator == "sub":
-            if isinstance(value, tuple) and len(value) == 2:
-                delta = Vec2.from_tuple(value)
-                return (current - delta).normalized()
-            else:
-                angle_deg = value[0] if isinstance(value, tuple) else value
-                angle_rad = math.radians(-angle_deg)
-                cos_a = math.cos(angle_rad)
-                sin_a = math.sin(angle_rad)
-                new_x = current.x * cos_a - current.y * sin_a
-                new_y = current.x * sin_a + current.y * cos_a
-                return Vec2(new_x, new_y).normalized()
         elif operator == "mul":
             scalar = value[0] if isinstance(value, tuple) else value
             result = Vec2(current.x * scalar, current.y * scalar)
@@ -158,14 +134,6 @@ def calculate_direction_target(
             else:
                 angle_deg = value[0] if isinstance(value, tuple) else value
                 return angle_deg
-        elif operator == "sub":
-            if isinstance(value, tuple) and len(value) == 2:
-                v = Vec2.from_tuple(value)
-                return Vec2(-v.x, -v.y)
-            else:
-                angle_deg = value[0] if isinstance(value, tuple) else value
-                return -angle_deg
-
     return current
 
 
@@ -270,8 +238,6 @@ def calculate_vector_target(
             return Vec2(vec.magnitude(), 0)
         elif operator in ("by", "add"):
             return Vec2(1.0 + vec.magnitude(), 0)
-        elif operator == "sub":
-            return Vec2(1.0 - vec.magnitude(), 0)
 
     elif mode == "override":
         if operator == "to":
@@ -279,17 +245,12 @@ def calculate_vector_target(
         elif operator in ("by", "add"):
             current_velocity = current_direction * current_speed
             return current_velocity + vec
-        elif operator == "sub":
-            current_velocity = current_direction * current_speed
-            return current_velocity - vec
 
     else:  # offset
         if operator == "to":
             return vec
         elif operator in ("by", "add"):
             return vec
-        elif operator == "sub":
-            return Vec2(-vec.x, -vec.y)
 
     return vec
 
