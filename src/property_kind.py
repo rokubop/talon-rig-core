@@ -86,3 +86,16 @@ def zero_value_for_kind(kind: PropertyKind) -> Any:
     elif kind == PropertyKind.VECTOR:
         return Vec2(0, 0)
     return 0.0
+
+
+def identity_value_for_kind(kind: PropertyKind) -> Any:
+    """Get multiplicative identity value for a PropertyKind (scale mode)"""
+    if kind == PropertyKind.SCALAR:
+        return 1.0
+    elif kind == PropertyKind.POSITION:
+        return Vec2(1, 1)
+    elif kind == PropertyKind.DIRECTION:
+        return Vec2(1, 0)
+    elif kind == PropertyKind.VECTOR:
+        return Vec2(1, 1)
+    return 1.0

@@ -15,7 +15,7 @@ from typing import Optional, Any, Callable, TYPE_CHECKING
 from collections import deque
 
 from .vec2 import Vec2, is_vec2, EPSILON
-from .property_kind import PropertyKind, zero_value_for_kind
+from .property_kind import PropertyKind, zero_value_for_kind, identity_value_for_kind
 from .lifecycle import Lifecycle
 
 if TYPE_CHECKING:
@@ -53,6 +53,8 @@ class BaseLayerGroup:
         # Accumulated state (for modifier layers - persists after builders complete)
         if property_kind == PropertyKind.DIRECTION and mode == "offset":
             self.accumulated_value: Any = None
+        elif mode == "scale":
+            self.accumulated_value: Any = identity_value_for_kind(property_kind)
         else:
             self.accumulated_value: Any = zero_value_for_kind(property_kind)
 
@@ -158,7 +160,9 @@ class BaseLayerGroup:
             if self.is_base:
                 return "bake_to_base"
             else:
-                if is_vec2(self.accumulated_value):
+                if self.mode == "scale":
+                    self.accumulated_value = identity_value_for_kind(self.property_kind)
+                elif is_vec2(self.accumulated_value):
                     self.accumulated_value = Vec2(0, 0)
                 else:
                     self.accumulated_value = 0.0
@@ -171,7 +175,9 @@ class BaseLayerGroup:
 
         # Modifier layers: accumulate in group
         if self.accumulated_value is None:
-            if isinstance(value, (int, float)):
+            if self.mode == "scale":
+                self.accumulated_value = identity_value_for_kind(self.property_kind)
+            elif isinstance(value, (int, float)):
                 self.accumulated_value = 0.0
             elif is_vec2(value):
                 self.accumulated_value = Vec2(0, 0)
@@ -227,7 +233,9 @@ class BaseLayerGroup:
         result = self.accumulated_value
 
         if result is None:
-            if self.builders:
+            if self.mode == "scale":
+                result = identity_value_for_kind(self.property_kind)
+            elif self.builders:
                 first_value = self.builders[0].get_interpolated_value()
                 if is_vec2(first_value):
                     result = Vec2(0, 0)
@@ -256,11 +264,14 @@ class BaseLayerGroup:
         result = self.accumulated_value
 
         if result is None:
-            first_target = self.builders[0].target_value
-            if is_vec2(first_target):
-                result = Vec2(0, 0)
+            if self.mode == "scale":
+                result = identity_value_for_kind(self.property_kind)
             else:
-                result = 0.0
+                first_target = self.builders[0].target_value
+                if is_vec2(first_target):
+                    result = Vec2(0, 0)
+                else:
+                    result = 0.0
 
         for builder in self.builders:
             target = builder.target_value
@@ -289,9 +300,17 @@ class BaseLayerGroup:
         return not is_zero
 
     def _is_reverted_to_zero(self) -> bool:
-        """Check if accumulated value is effectively zero/identity"""
+        """Check if accumulated value is effectively at neutral (zero for offset, identity for scale)"""
         if self.accumulated_value is None:
             return True
+        if self.mode == "scale":
+            # Scale identity is 1.0 / Vec2(1, 1)
+            if is_vec2(self.accumulated_value):
+                return (abs(self.accumulated_value.x - 1.0) < EPSILON and
+                        abs(self.accumulated_value.y - 1.0) < EPSILON)
+            if isinstance(self.accumulated_value, (int, float)):
+                return abs(self.accumulated_value - 1.0) < EPSILON
+            return False
         if is_vec2(self.accumulated_value):
             return (abs(self.accumulated_value.x) < EPSILON and
                     abs(self.accumulated_value.y) < EPSILON)

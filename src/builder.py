@@ -323,6 +323,31 @@ class BaseActiveBuilder(ABC):
         return self.__repr__()
 
     # ========================================================================
+    # UTILITY METHODS (shared by device rigs)
+    # ========================================================================
+
+    def _is_same_axis_reversal(self, base_val, target_val) -> bool:
+        """Detect same-axis 180° reversal between two Vec2 values.
+
+        Returns True when both vectors are on the same axis (one component ~0)
+        and pointing in opposite directions (dot product < -0.9).
+
+        Used by device builders to auto-switch interpolation to 'linear'
+        for smooth zero-crossing during direction reversals.
+        """
+        if not is_vec2(base_val) or not is_vec2(target_val):
+            return False
+
+        base_x_zero = abs(base_val.x) < 0.01
+        base_y_zero = abs(base_val.y) < 0.01
+        target_x_zero = abs(target_val.x) < 0.01
+        target_y_zero = abs(target_val.y) < 0.01
+
+        opposite_direction = base_val.dot(target_val) < -0.9
+
+        return ((base_x_zero and target_x_zero) or (base_y_zero and target_y_zero)) and opposite_direction
+
+    # ========================================================================
     # ABSTRACT METHODS (3 — device rigs implement)
     # ========================================================================
 

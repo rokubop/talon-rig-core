@@ -20,7 +20,7 @@ from .easing import (
 )
 
 # Property kind system
-from .property_kind import PropertyKind, PropertySchema, zero_value_for_kind
+from .property_kind import PropertyKind, PropertySchema, zero_value_for_kind, identity_value_for_kind
 
 # Contracts and validation
 from .contracts import (

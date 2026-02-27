@@ -12,7 +12,7 @@ from typing import Optional, Any, Union, TYPE_CHECKING
 
 from .vec2 import Vec2, is_vec2, EPSILON
 from .lifecycle import Lifecycle
-from .property_kind import PropertyKind
+from .property_kind import PropertyKind, zero_value_for_kind, identity_value_for_kind
 from .contracts import (
     BaseBuilderConfig,
     LifecyclePhase,
@@ -243,7 +243,11 @@ class BaseRigState(ABC):
         group.clear_builders()
 
         if not group.is_base:
-            group.accumulated_value = current_value
+            # Reset accumulated to mode identity - builder.base_value captures the snapshot
+            if group.mode == "scale":
+                group.accumulated_value = identity_value_for_kind(group.property_kind)
+            else:
+                group.accumulated_value = zero_value_for_kind(group.property_kind)
 
         if is_vec2(current_value):
             builder.base_value = current_value
