@@ -343,7 +343,9 @@ class BaseActiveBuilder(ABC):
         target_x_zero = abs(target_val.x) < 0.01
         target_y_zero = abs(target_val.y) < 0.01
 
-        opposite_direction = base_val.dot(target_val) < -0.9
+        base_norm = base_val.normalized()
+        target_norm = target_val.normalized()
+        opposite_direction = base_norm.dot(target_norm) < -0.9
 
         return ((base_x_zero and target_x_zero) or (base_y_zero and target_y_zero)) and opposite_direction
 

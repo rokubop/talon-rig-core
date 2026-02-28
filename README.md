@@ -1,10 +1,12 @@
 # Rig Core
 
-![Version](https://img.shields.io/badge/version-0.1.0-blue)
+![Version](https://img.shields.io/badge/version-0.5.0-blue)
 ![Status](https://img.shields.io/badge/status-experimental-orange)
 ![License](https://img.shields.io/badge/license-MIT-green)
 
 Shared core library for device rigs (mouse-rig, gamepad-rig). Provides base classes, lifecycle, layer groups, mode operations, and animation infrastructure.
+
+This repo does nothing by itself - it's meant to be used as a dependency by other rigs.
 
 ## Installation
 
@@ -17,5 +19,5 @@ cd ~/.talon/user
 # windows
 cd ~/AppData/Roaming/talon/user
 
-git clone <github_url>  # Add github URL to manifest.json
+git clone https://github.com/rokubop/talon-rig-core
 ```
