@@ -13,10 +13,10 @@ This repo does nothing by itself - it's meant to be used as a dependency by othe
 Clone this repo into your [Talon](https://talonvoice.com/) user directory:
 
 ```sh
-# mac and linux
+# Mac/Linux
 cd ~/.talon/user
 
-# windows
+# Windows
 cd ~/AppData/Roaming/talon/user
 
 git clone https://github.com/rokubop/talon-rig-core
