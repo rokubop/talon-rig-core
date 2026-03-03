@@ -1,4 +1,4 @@
-"""Rig Core — Action-based lazy loading for consumer rigs
+"""Rig Core - Action-based lazy loading for consumer rigs
 
 Consumer rigs get the core module via:
     core = actions.user.rig_core()

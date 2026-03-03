@@ -24,17 +24,17 @@ class BaseActiveBuilder(ABC):
     """An active builder being executed in the state manager.
 
     Concrete methods:
-    - __init__ — lifecycle setup, callbacks, calls abstract hooks
-    - _resolve_base_value() — template method (to->current_or_base, by/add->base for modifiers)
-    - _get_current_or_base_value() — check group for mid-animation value
-    - advance(current_time) — advance lifecycle
-    - _get_own_value() — interpolation dispatch by PropertyKind
-    - get_interpolated_value() — public interpolated value
+    - __init__ - lifecycle setup, callbacks, calls abstract hooks
+    - _resolve_base_value() - template method (to->current_or_base, by/add->base for modifiers)
+    - _get_current_or_base_value() - check group for mid-animation value
+    - advance(current_time) - advance lifecycle
+    - _get_own_value() - interpolation dispatch by PropertyKind
+    - get_interpolated_value() - public interpolated value
 
     Abstract methods (3):
-    - _get_base_value() — read raw base from device state
-    - _calculate_target_value() — compute target via mode_operations
-    - _get_property_kind() — return PropertyKind for animation routing
+    - _get_base_value() - read raw base from device state
+    - _calculate_target_value() - compute target via mode_operations
+    - _get_property_kind() - return PropertyKind for animation routing
     """
 
     def __init__(self, config: BaseBuilderConfig, rig_state: 'BaseRigState', is_base_layer: bool):
@@ -350,7 +350,7 @@ class BaseActiveBuilder(ABC):
         return ((base_x_zero and target_x_zero) or (base_y_zero and target_y_zero)) and opposite_direction
 
     # ========================================================================
-    # ABSTRACT METHODS (3 — device rigs implement)
+    # ABSTRACT METHODS (3 - device rigs implement)
     # ========================================================================
 
     @abstractmethod

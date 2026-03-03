@@ -1,4 +1,4 @@
-"""talon-rig-core — Shared core library for device rigs
+"""talon-rig-core - Shared core library for device rigs
 
 Re-exports all public symbols for convenient access via:
     core = actions.user.rig_core()

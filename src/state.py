@@ -41,16 +41,16 @@ class BaseRigState(ABC):
       _execute_phase_callbacks, _check_debounce_pending
     - Layer utilities: _targets_match, _clear_layer_tracking, trigger_revert
 
-    Abstract methods (9 — device rigs implement):
-    - bake_all() — flatten all layers into base state
-    - _get_or_create_group(builder) — init accumulated value from device base state
-    - _compute_current_state() — apply all layers to base, return device tuple
-    - _apply_group(group, *accumulated) — apply single group to accumulated state
-    - _tick_frame() — frame body (advance + compute output + emit to hardware)
-    - _bake_group_to_base(group) — write group value to base state fields
-    - _bake_property(property_name, layer) — bake computed value into base
-    - stop(transition_ms, easing) — stop all activity
-    - _create_active_builder(config, is_base) — factory for device-specific ActiveBuilder
+    Abstract methods (9 - device rigs implement):
+    - bake_all() - flatten all layers into base state
+    - _get_or_create_group(builder) - init accumulated value from device base state
+    - _compute_current_state() - apply all layers to base, return device tuple
+    - _apply_group(group, *accumulated) - apply single group to accumulated state
+    - _tick_frame() - frame body (advance + compute output + emit to hardware)
+    - _bake_group_to_base(group) - write group value to base state fields
+    - _bake_property(property_name, layer) - bake computed value into base
+    - stop(transition_ms, easing) - stop all activity
+    - _create_active_builder(config, is_base) - factory for device-specific ActiveBuilder
     """
 
     def __init__(self):
@@ -383,7 +383,7 @@ class BaseRigState(ABC):
     # ========================================================================
 
     def add_builder(self, builder: 'BaseActiveBuilder'):
-        """Add a builder to its layer group — the main pipeline"""
+        """Add a builder to its layer group - the main pipeline"""
         layer = builder.config.layer_name
 
         if builder.config.operator == "bake":
@@ -645,7 +645,7 @@ class BaseRigState(ABC):
                         builder.base_value = builder.base_value * -1
 
     # ========================================================================
-    # ABSTRACT METHODS (9 — device rigs implement)
+    # ABSTRACT METHODS (9 - device rigs implement)
     # ========================================================================
 
     @abstractmethod
@@ -688,7 +688,7 @@ class BaseRigState(ABC):
 
     @abstractmethod
     def _tick_frame(self):
-        """Frame loop body — advance builders, compute output, emit to hardware."""
+        """Frame loop body - advance builders, compute output, emit to hardware."""
         ...
 
     @abstractmethod
