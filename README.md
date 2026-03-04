@@ -6,6 +6,8 @@
 
 Shared core library for device rigs (mouse-rig, gamepad-rig). Provides base classes, lifecycle, layer groups, mode operations, and animation infrastructure.
 
+Included in [talon-gamekit](https://github.com/rokubop/talon-gamekit), but can be used standalone.
+
 This repo does nothing by itself - it's meant to be used as a dependency by other rigs.
 
 ## Installation
