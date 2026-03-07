@@ -1,6 +1,6 @@
 # Rig Core
 
-![Version](https://img.shields.io/badge/version-0.6.2-blue)
+![Version](https://img.shields.io/badge/version-0.6.3-blue)
 ![Status](https://img.shields.io/badge/status-experimental-orange)
 ![License](https://img.shields.io/badge/license-MIT-green)
 
