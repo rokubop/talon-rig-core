@@ -2,27 +2,22 @@
   "name": "talon-rig-core",
   "title": "Rig Core",
   "description": "Shared core library for device rigs (mouse-rig, gamepad-rig). Provides base classes, lifecycle, layer groups, mode operations, and animation infrastructure.",
-  "version": "0.6.4",
+  "version": "0.6.5",
   "status": "experimental",
   "namespace": "user.rig_core",
   "github": "https://github.com/rokubop/talon-rig-core",
-  "preview": "",
+  "preview": "https://raw.githubusercontent.com/rokubop/talon-rig-core/main/preview.svg",
   "author": "Rokubop",
-  "tags": [
-    "rig"
-  ],
+  "tags": ["rig"],
   "license": "MIT",
   "dependencies": {},
   "devDependencies": {},
   "contributes": {
-    "actions": [
-      "user.rig_core",
-      "user.rig_core_version"
-    ]
+    "actions": ["user.rig_core", "user.rig_core_version"]
   },
   "depends": {},
   "_generator": "talon-pack",
-  "_generatorVersion": "3.2.1",
+  "_generatorVersion": "3.2.2",
   "_generatorRequiresVersionAction": true,
   "_generatorStrictNamespace": true,
   "_generatorFrozenFields": [],
