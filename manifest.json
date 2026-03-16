@@ -8,16 +8,20 @@
   "github": "https://github.com/rokubop/talon-rig-core",
   "preview": "https://raw.githubusercontent.com/rokubop/talon-rig-core/main/preview.svg",
   "author": "Rokubop",
-  "tags": ["rig"],
+  "tags": [
+    "rig"
+  ],
   "license": "MIT",
   "dependencies": {},
-  "devDependencies": {},
   "contributes": {
-    "actions": ["user.rig_core", "user.rig_core_version"]
+    "actions": [
+      "user.rig_core",
+      "user.rig_core_version"
+    ]
   },
   "depends": {},
   "_generator": "talon-pack",
-  "_generatorVersion": "3.2.2",
+  "_generatorVersion": "3.3.0",
   "_generatorRequiresVersionAction": true,
   "_generatorStrictNamespace": true,
   "_generatorFrozenFields": [],
