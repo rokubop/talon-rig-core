@@ -24,3 +24,6 @@ cd ~/AppData/Roaming/talon/user
 
 git clone https://github.com/rokubop/talon-rig-core
 ```
+
+## More Talon packages
+Check out my other Talon packages for UI, mouse control, input mapping, and more at [talon-hub-roku](https://github.com/rokubop/talon-hub-roku).
