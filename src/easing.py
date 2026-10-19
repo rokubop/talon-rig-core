@@ -59,21 +59,25 @@ def ease_in_out4(t: float) -> float:
     return 8 * t ** 4 if t < 0.5 else 1 - (-2 * t + 2) ** 4 / 2
 
 
-EASING_FUNCTIONS = {
-    "linear": ease_linear,
-    "ease_in": ease_in,
-    "ease_out": ease_out,
-    "ease_in_out": ease_in_out,
-    "ease_in2": ease_in2,
-    "ease_out2": ease_out2,
-    "ease_in_out2": ease_in_out2,
-    "ease_in3": ease_in3,
-    "ease_out3": ease_out3,
-    "ease_in_out3": ease_in_out3,
-    "ease_in4": ease_in4,
-    "ease_out4": ease_out4,
-    "ease_in_out4": ease_in_out4,
+# name: (function, what it does). The one list of easings: validation,
+# lookup and rig_core_types() all read it.
+EASINGS = {
+    "linear": (ease_linear, "The same pace start to end."),
+    "ease_in": (ease_in, "Starts slow and speeds up, on a sine curve."),
+    "ease_out": (ease_out, "Starts fast and slows into the end, on a sine curve."),
+    "ease_in_out": (ease_in_out, "Slow at both ends, fastest in the middle, on a sine curve."),
+    "ease_in2": (ease_in2, "ease_in, sharper: a squared curve."),
+    "ease_out2": (ease_out2, "ease_out, sharper: a squared curve."),
+    "ease_in_out2": (ease_in_out2, "ease_in_out, sharper: a squared curve."),
+    "ease_in3": (ease_in3, "ease_in, sharper again: a cubed curve."),
+    "ease_out3": (ease_out3, "ease_out, sharper again: a cubed curve."),
+    "ease_in_out3": (ease_in_out3, "ease_in_out, sharper again: a cubed curve."),
+    "ease_in4": (ease_in4, "ease_in at its sharpest: a fourth-power curve."),
+    "ease_out4": (ease_out4, "ease_out at its sharpest: a fourth-power curve."),
+    "ease_in_out4": (ease_in_out4, "ease_in_out at its sharpest: a fourth-power curve."),
 }
+
+EASING_FUNCTIONS = {name: fn for name, (fn, _desc) in EASINGS.items()}
 
 
 def get_easing_function(name: str) -> Callable[[float], float]:

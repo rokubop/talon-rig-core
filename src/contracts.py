@@ -6,6 +6,8 @@ to add device-specific fields.
 
 from typing import Callable, Any, Optional
 
+from .easing import EASINGS
+
 
 # ============================================================================
 # LAYER CLASSIFICATION
@@ -29,19 +31,34 @@ class LayerType:
 # VALID OPTIONS
 # ============================================================================
 
-VALID_MODES = ['offset', 'override', 'scale']
+# name: what it does. rig_core_types() describes each set from these.
+MODES = {
+    'offset': "Adds to the incoming value.",
+    'override': "Replaces the incoming value.",
+    'scale': "Multiplies the incoming value.",
+}
 
-VALID_EASINGS = [
-    'linear',
-    'ease_in', 'ease_out', 'ease_in_out',
-    'ease_in2', 'ease_out2', 'ease_in_out2',
-    'ease_in3', 'ease_out3', 'ease_in_out3',
-    'ease_in4', 'ease_out4', 'ease_in_out4',
-]
+INTERPOLATIONS = {
+    'lerp': "Blends the two directions and keeps the result a direction; a vector's speed blends separately. Quickest through the middle of a turn.",
+    'slerp': "Turns at an even rate through the angle between the two directions. Directions only: a vector treats it as lerp.",
+    'linear': "Blends x and y each on their own, with no normalizing: for reversals, where the direction passes through zero.",
+}
 
-VALID_INTERPOLATIONS = ['lerp', 'slerp', 'linear']
+BEHAVIORS = {
+    'stack': "Adds another instance on top. stack(max) caps how many.",
+    'replace': "Cancels the running instance and starts again.",
+    'queue': "Waits for the running instance to finish, then runs.",
+    'throttle': "throttle(ms) ignores fires again within ms. Bare throttle() ignores them while the last one is still running.",
+    'debounce': "debounce(ms) runs once fires have stopped for ms. The ms is needed.",
+}
 
-VALID_BEHAVIORS = ['stack', 'replace', 'queue', 'throttle', 'debounce']
+VALID_MODES = list(MODES)
+
+VALID_EASINGS = list(EASINGS)
+
+VALID_INTERPOLATIONS = list(INTERPOLATIONS)
+
+VALID_BEHAVIORS = list(BEHAVIORS)
 
 METHOD_SIGNATURES = {
     'over': {
