@@ -1,10 +1,4 @@
-"""user.rig_core_types(): the named sets of values rigs take, each
-value described. A param that takes one says so in its docstring:
-`Type: rig_core.easing`.
-
-Read from the tables the code runs on, so there is no list to keep in
-step.
-"""
+"""Value sets for user.rig_core_types(), built from the tables the code runs on."""
 
 from talon import Module
 
@@ -45,6 +39,6 @@ def types() -> dict:
 @mod.action_class
 class Actions:
     def rig_core_types() -> dict:
-        """Named sets of values rigs take, each value described:
+        """Named sets of values rigs take:
         {name: {"desc": str, "values": [{"id": str, "desc": str}]}}"""
         return types()

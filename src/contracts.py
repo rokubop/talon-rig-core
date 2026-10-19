@@ -31,7 +31,6 @@ class LayerType:
 # VALID OPTIONS
 # ============================================================================
 
-# name: what it does. rig_core_types() describes each set from these.
 MODES = {
     'offset': "Adds to the incoming value.",
     'override': "Replaces the incoming value.",
@@ -39,17 +38,17 @@ MODES = {
 }
 
 INTERPOLATIONS = {
-    'lerp': "Blends the two directions and keeps the result a direction; a vector's speed blends separately. Quickest through the middle of a turn.",
-    'slerp': "Turns at an even rate through the angle between the two directions. Directions only: a vector treats it as lerp.",
-    'linear': "Blends x and y each on their own, with no normalizing: for reversals, where the direction passes through zero.",
+    'lerp': "Blends directions, renormalized. Fastest mid-turn.",
+    'slerp': "Even turn rate. Directions only; vectors use lerp.",
+    'linear': "Blends x and y separately, no normalizing. For reversals through zero.",
 }
 
 BEHAVIORS = {
     'stack': "Adds another instance on top. stack(max) caps how many.",
     'replace': "Cancels the running instance and starts again.",
     'queue': "Waits for the running instance to finish, then runs.",
-    'throttle': "throttle(ms) ignores fires again within ms. Bare throttle() ignores them while the last one is still running.",
-    'debounce': "debounce(ms) runs once fires have stopped for ms. The ms is needed.",
+    'throttle': "throttle(ms) ignores fires within ms. Bare throttle() ignores them while one is running.",
+    'debounce': "debounce(ms) runs once fires have stopped for ms. ms required.",
 }
 
 VALID_MODES = list(MODES)

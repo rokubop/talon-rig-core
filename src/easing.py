@@ -59,8 +59,7 @@ def ease_in_out4(t: float) -> float:
     return 8 * t ** 4 if t < 0.5 else 1 - (-2 * t + 2) ** 4 / 2
 
 
-# name: (function, what it does). The one list of easings: validation,
-# lookup and rig_core_types() all read it.
+# name: (function, description)
 EASINGS = {
     "linear": (ease_linear, "The same pace start to end."),
     "ease_in": (ease_in, "Starts slow and speeds up, on a sine curve."),
