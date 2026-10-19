@@ -1,0 +1,124 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "user.rig_core",
+  "x-format": 1,
+  "description": "What rigs accept beyond their actions' signatures: the values the fluent builder's methods take.",
+  "$defs": {
+    "easing": {
+      "description": "How a change paces itself over its time.",
+      "oneOf": [
+        {
+          "const": "linear",
+          "description": "The same pace start to end."
+        },
+        {
+          "const": "ease_in",
+          "description": "Starts slow and speeds up, on a sine curve."
+        },
+        {
+          "const": "ease_out",
+          "description": "Starts fast and slows into the end, on a sine curve."
+        },
+        {
+          "const": "ease_in_out",
+          "description": "Slow at both ends, fastest in the middle, on a sine curve."
+        },
+        {
+          "const": "ease_in2",
+          "description": "ease_in, sharper: a squared curve."
+        },
+        {
+          "const": "ease_out2",
+          "description": "ease_out, sharper: a squared curve."
+        },
+        {
+          "const": "ease_in_out2",
+          "description": "ease_in_out, sharper: a squared curve."
+        },
+        {
+          "const": "ease_in3",
+          "description": "ease_in, sharper again: a cubed curve."
+        },
+        {
+          "const": "ease_out3",
+          "description": "ease_out, sharper again: a cubed curve."
+        },
+        {
+          "const": "ease_in_out3",
+          "description": "ease_in_out, sharper again: a cubed curve."
+        },
+        {
+          "const": "ease_in4",
+          "description": "ease_in at its sharpest: a fourth-power curve."
+        },
+        {
+          "const": "ease_out4",
+          "description": "ease_out at its sharpest: a fourth-power curve."
+        },
+        {
+          "const": "ease_in_out4",
+          "description": "ease_in_out at its sharpest: a fourth-power curve."
+        }
+      ]
+    },
+    "interpolation": {
+      "description": "How a direction or vector gets from one value to the other.",
+      "oneOf": [
+        {
+          "const": "lerp",
+          "description": "Blends the two directions and keeps the result a direction; a vector's speed blends separately. Quickest through the middle of a turn."
+        },
+        {
+          "const": "slerp",
+          "description": "Turns at an even rate through the angle between the two directions. Directions only: a vector treats it as lerp."
+        },
+        {
+          "const": "linear",
+          "description": "Blends x and y each on their own, with no normalizing: for reversals, where the direction passes through zero."
+        }
+      ]
+    },
+    "mode": {
+      "description": "What a layer does to the value coming into it.",
+      "oneOf": [
+        {
+          "const": "offset",
+          "description": "Adds to the incoming value."
+        },
+        {
+          "const": "override",
+          "description": "Replaces the incoming value."
+        },
+        {
+          "const": "scale",
+          "description": "Multiplies the incoming value."
+        }
+      ]
+    },
+    "behavior": {
+      "description": "What happens when a change fires again while the last one is still running. 'to' replaces by default; the rest stack.",
+      "oneOf": [
+        {
+          "const": "stack",
+          "description": "Adds another instance on top. stack(max) caps how many."
+        },
+        {
+          "const": "replace",
+          "description": "Cancels the running instance and starts again."
+        },
+        {
+          "const": "queue",
+          "description": "Waits for the running instance to finish, then runs."
+        },
+        {
+          "const": "throttle",
+          "description": "throttle(ms) ignores fires again within ms. Bare throttle() ignores them while the last one is still running."
+        },
+        {
+          "const": "debounce",
+          "description": "debounce(ms) runs once fires have stopped for ms. The ms is needed."
+        }
+      ]
+    }
+  }
+}

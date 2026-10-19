@@ -5,6 +5,7 @@ to add device-specific fields.
 """
 
 from typing import Callable, Any, Optional
+from .._schema import ids
 
 
 # ============================================================================
@@ -29,19 +30,14 @@ class LayerType:
 # VALID OPTIONS
 # ============================================================================
 
-VALID_MODES = ['offset', 'override', 'scale']
+# schema.json is the one place these are listed, each described
+VALID_MODES = ids("mode")
 
-VALID_EASINGS = [
-    'linear',
-    'ease_in', 'ease_out', 'ease_in_out',
-    'ease_in2', 'ease_out2', 'ease_in_out2',
-    'ease_in3', 'ease_out3', 'ease_in_out3',
-    'ease_in4', 'ease_out4', 'ease_in_out4',
-]
+VALID_EASINGS = ids("easing")
 
-VALID_INTERPOLATIONS = ['lerp', 'slerp', 'linear']
+VALID_INTERPOLATIONS = ids("interpolation")
 
-VALID_BEHAVIORS = ['stack', 'replace', 'queue', 'throttle', 'debounce']
+VALID_BEHAVIORS = ids("behavior")
 
 METHOD_SIGNATURES = {
     'over': {
