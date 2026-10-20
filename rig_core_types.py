@@ -18,7 +18,7 @@ def _values(table: dict) -> list:
 def types() -> dict:
     return {
         "easing": {
-            "desc": "Formulas, t from 0 to 1.",
+            "desc": "Easing curve, t from 0 to 1.",
             "values": _values(EASINGS),
         },
         "interpolation": {
