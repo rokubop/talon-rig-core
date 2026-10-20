@@ -6,6 +6,8 @@ to add device-specific fields.
 
 from typing import Callable, Any, Optional
 
+from .easing import EASINGS
+
 
 # ============================================================================
 # LAYER CLASSIFICATION
@@ -29,19 +31,33 @@ class LayerType:
 # VALID OPTIONS
 # ============================================================================
 
-VALID_MODES = ['offset', 'override', 'scale']
+MODES = {
+    'offset': "Adds to the incoming value.",
+    'override': "Replaces the incoming value.",
+    'scale': "Multiplies the incoming value.",
+}
 
-VALID_EASINGS = [
-    'linear',
-    'ease_in', 'ease_out', 'ease_in_out',
-    'ease_in2', 'ease_out2', 'ease_in_out2',
-    'ease_in3', 'ease_out3', 'ease_in_out3',
-    'ease_in4', 'ease_out4', 'ease_in_out4',
-]
+INTERPOLATIONS = {
+    'lerp': "Blends directions, renormalized. Fastest mid-turn.",
+    'slerp': "Even turn rate. Directions only; vectors use lerp.",
+    'linear': "Blends x and y separately, no normalizing. For reversals through zero.",
+}
 
-VALID_INTERPOLATIONS = ['lerp', 'slerp', 'linear']
+BEHAVIORS = {
+    'stack': "Adds another instance on top. stack(max) caps how many.",
+    'replace': "Cancels the running instance and starts again.",
+    'queue': "Waits for the running instance to finish, then runs.",
+    'throttle': "throttle(ms) ignores fires within ms. Bare throttle() ignores them while one is running.",
+    'debounce': "debounce(ms) runs once fires have stopped for ms. ms required.",
+}
 
-VALID_BEHAVIORS = ['stack', 'replace', 'queue', 'throttle', 'debounce']
+VALID_MODES = list(MODES)
+
+VALID_EASINGS = list(EASINGS)
+
+VALID_INTERPOLATIONS = list(INTERPOLATIONS)
+
+VALID_BEHAVIORS = list(BEHAVIORS)
 
 METHOD_SIGNATURES = {
     'over': {
