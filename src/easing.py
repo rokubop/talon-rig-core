@@ -59,21 +59,21 @@ def ease_in_out4(t: float) -> float:
     return 8 * t ** 4 if t < 0.5 else 1 - (-2 * t + 2) ** 4 / 2
 
 
-# name: (function, description)
+# name: (function, formula), t from 0 to 1
 EASINGS = {
-    "linear": (ease_linear, "The same pace start to end."),
-    "ease_in": (ease_in, "Starts slow and speeds up, on a sine curve."),
-    "ease_out": (ease_out, "Starts fast and slows into the end, on a sine curve."),
-    "ease_in_out": (ease_in_out, "Slow at both ends, fastest in the middle, on a sine curve."),
-    "ease_in2": (ease_in2, "ease_in, sharper: a squared curve."),
-    "ease_out2": (ease_out2, "ease_out, sharper: a squared curve."),
-    "ease_in_out2": (ease_in_out2, "ease_in_out, sharper: a squared curve."),
-    "ease_in3": (ease_in3, "ease_in, sharper again: a cubed curve."),
-    "ease_out3": (ease_out3, "ease_out, sharper again: a cubed curve."),
-    "ease_in_out3": (ease_in_out3, "ease_in_out, sharper again: a cubed curve."),
-    "ease_in4": (ease_in4, "ease_in at its sharpest: a fourth-power curve."),
-    "ease_out4": (ease_out4, "ease_out at its sharpest: a fourth-power curve."),
-    "ease_in_out4": (ease_in_out4, "ease_in_out at its sharpest: a fourth-power curve."),
+    "linear": (ease_linear, "t"),
+    "ease_in": (ease_in, "1 - cos(t * pi/2)"),
+    "ease_out": (ease_out, "sin(t * pi/2)"),
+    "ease_in_out": (ease_in_out, "(1 - cos(t * pi)) / 2"),
+    "ease_in2": (ease_in2, "t^2"),
+    "ease_out2": (ease_out2, "1 - (1 - t)^2"),
+    "ease_in_out2": (ease_in_out2, "2t^2, then 1 - (2 - 2t)^2 / 2 past halfway"),
+    "ease_in3": (ease_in3, "t^3"),
+    "ease_out3": (ease_out3, "1 - (1 - t)^3"),
+    "ease_in_out3": (ease_in_out3, "4t^3, then 1 - (2 - 2t)^3 / 2 past halfway"),
+    "ease_in4": (ease_in4, "t^4"),
+    "ease_out4": (ease_out4, "1 - (1 - t)^4"),
+    "ease_in_out4": (ease_in_out4, "8t^4, then 1 - (2 - 2t)^4 / 2 past halfway"),
 }
 
 EASING_FUNCTIONS = {name: fn for name, (fn, _desc) in EASINGS.items()}
