@@ -22,15 +22,15 @@ def types() -> dict:
             "values": _values(EASINGS),
         },
         "interpolation": {
-            "desc": "How a direction or vector gets from one value to the other.",
+            "desc": "How x and y blend from one value to the next.",
             "values": _values(INTERPOLATIONS),
         },
         "mode": {
-            "desc": "What a layer does to the value coming into it.",
+            "desc": "How a layer combines with what's beneath it.",
             "values": _values(MODES),
         },
         "behavior": {
-            "desc": "What happens when a change fires again while the last one is still running. 'to' replaces by default; the rest stack.",
+            "desc": "What a repeat does while the last is still running. Default: 'to' replaces, the rest stack.",
             "values": _values(BEHAVIORS),
         },
     }
